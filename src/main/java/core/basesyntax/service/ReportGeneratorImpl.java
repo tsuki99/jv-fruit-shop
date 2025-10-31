@@ -1,4 +1,4 @@
-package core.basesyntax.generator;
+package core.basesyntax.service;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -16,7 +16,7 @@ public class ReportGeneratorImpl implements ReportGenerator {
                 writer.newLine();
             }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Can't find path: " + filePath, e);
         }
     }
 }

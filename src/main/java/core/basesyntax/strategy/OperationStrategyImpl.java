@@ -1,7 +1,6 @@
 package core.basesyntax.strategy;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.operation.OperationHandler;
 import java.util.Map;
 
 public class OperationStrategyImpl implements OperationStrategy {
@@ -13,6 +12,12 @@ public class OperationStrategyImpl implements OperationStrategy {
 
     @Override
     public OperationHandler get(FruitTransaction.Type type) {
-        return operationHandlerMap.get(type);
+        OperationHandler handler = operationHandlerMap.get(type);
+
+        if (handler == null) {
+            throw new RuntimeException("No handler yet for type: " + type);
+        }
+
+        return handler;
     }
 }

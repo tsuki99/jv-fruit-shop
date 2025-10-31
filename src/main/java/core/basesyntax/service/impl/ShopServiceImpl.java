@@ -1,7 +1,7 @@
-package core.basesyntax.service;
+package core.basesyntax.service.impl;
 
-import core.basesyntax.operation.OperationHandler;
-import core.basesyntax.parser.FruitParser;
+import core.basesyntax.service.ShopService;
+import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
 import java.util.List;
 
@@ -19,6 +19,12 @@ public class ShopServiceImpl implements ShopService {
                 .forEach(fruitTransaction -> {
                     OperationHandler operationHandler = operationStrategy
                             .get(fruitTransaction.getOperationType());
+
+                    if (operationHandler == null) {
+                        throw new RuntimeException("No handler yet for type: "
+                                + fruitTransaction.getOperationType());
+                    }
+
                     operationHandler.pushToStorage(fruitTransaction);
                 });
     }

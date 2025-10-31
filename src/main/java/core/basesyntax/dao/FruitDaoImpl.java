@@ -12,7 +12,16 @@ public class FruitDaoImpl implements FruitDao {
     @Override
     public void add(String fruitName, int quantity,
                     BiFunction<Integer, Integer, Integer> operation) {
-        fruitStorage.merge(fruitName, quantity, operation);
+        fruitStorage.compute(fruitName, (k, oldValue) -> {
+            int current = oldValue == null ? 0 : oldValue;
+            int result = operation.apply(current, quantity);
+
+            if (result < 0) {
+                throw new RuntimeException("Not enough " + fruitName + " in storage!");
+            }
+
+            return result;
+        });
     }
 
     @Override
@@ -27,6 +36,6 @@ public class FruitDaoImpl implements FruitDao {
 
     @Override
     public Map<String, Integer> getAll() {
-        return new HashMap<>(FruitStorage.getStorage());
+        return new HashMap<>(fruitStorage);
     }
 }

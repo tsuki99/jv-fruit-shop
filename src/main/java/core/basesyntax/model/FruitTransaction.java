@@ -3,9 +3,9 @@ package core.basesyntax.model;
 import java.util.Objects;
 
 public class FruitTransaction {
-    private Type operationType;
-    private String fruitName;
-    private int quantity;
+    private final Type operationType;
+    private final String fruitName;
+    private final int quantity;
 
     public FruitTransaction(Type operationType, String fruitName, int quantity) {
         this.operationType = operationType;
@@ -17,27 +17,12 @@ public class FruitTransaction {
         return operationType;
     }
 
-    public FruitTransaction setOperationType(Type operationType) {
-        this.operationType = operationType;
-        return this;
-    }
-
     public String getFruitName() {
         return fruitName;
     }
 
-    public FruitTransaction setFruitName(String fruitName) {
-        this.fruitName = fruitName;
-        return this;
-    }
-
     public int getQuantity() {
         return quantity;
-    }
-
-    public FruitTransaction setQuantity(int quantity) {
-        this.quantity = quantity;
-        return this;
     }
 
     public enum Type {
