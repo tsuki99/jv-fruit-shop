@@ -19,9 +19,11 @@ public class FruitParser {
         FruitTransaction.Type type = getType(parts[0]);
         String name = parts[1];
 
-        int quantity = Integer.parseInt(parts[2]);
-        if (quantity < 0) {
-            throw new RuntimeException("Negative quantity: " + quantity);
+        int quantity;
+        try {
+            quantity = Integer.parseInt(parts[2]);
+        } catch (NumberFormatException e) {
+            throw new RuntimeException("Invalid quantity format");
         }
 
         return new FruitTransaction(type, name, quantity);

@@ -13,15 +13,6 @@ public class PurchaseOperationHandler implements OperationHandler {
     @Override
     public void pushToStorage(FruitTransaction transaction) {
         fruitDao.add(transaction.getFruitName(), transaction.getQuantity(),
-                (oldValue, newValue) -> {
-                int result = oldValue - newValue;
-
-                if (result < 0) {
-                        throw new RuntimeException("Not enough "
-                        + transaction.getFruitName() + " in storage!");
-                }
-
-                return result;
-            });
+                (oldValue, newValue) -> oldValue - newValue);
     }
 }

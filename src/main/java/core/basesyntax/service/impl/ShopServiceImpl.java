@@ -20,11 +20,6 @@ public class ShopServiceImpl implements ShopService {
                     OperationHandler operationHandler = operationStrategy
                             .get(fruitTransaction.getOperationType());
 
-                    if (operationHandler == null) {
-                        throw new RuntimeException("No handler yet for type: "
-                                + fruitTransaction.getOperationType());
-                    }
-
                     operationHandler.pushToStorage(fruitTransaction);
                 });
     }
