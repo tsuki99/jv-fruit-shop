@@ -23,7 +23,7 @@ public class FruitParser {
         try {
             quantity = Integer.parseInt(parts[2]);
         } catch (NumberFormatException e) {
-            throw new RuntimeException("Invalid quantity format");
+            throw new RuntimeException("Invalid quantity format", e);
         }
 
         return new FruitTransaction(type, name, quantity);
